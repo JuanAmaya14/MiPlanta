@@ -3,10 +3,11 @@ const { sequelize } = require("./config/Conexiondb");
 const rutas = require("./routes/rutas");
 
 const app = express();
-const port = 3000;
-const ip = "localhost";
 
 app.use(express.json());
+
+app.set("host", process.env.APP_HOST);
+app.set("port", process.env.APP_PORT);
 
 // Registrar modelos antes de sincronizar la base de datos
 require("./models/registroModel");
@@ -21,8 +22,10 @@ async function IniciarApp() {
 
     app.use("/", rutas);
 
-    app.listen(port, () => {
-      console.log(`http://${ip}:${port}`);
+    app.listen(app.get("port"), () => {
+      console.log(
+        `Servidor corriendo en: http://${app.get("host")}:${app.get("port")}`,
+      );
     });
   } catch (error) {
     console.error("Error al conectar con la base de datos:", error);

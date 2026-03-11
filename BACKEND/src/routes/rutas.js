@@ -7,6 +7,6 @@ router.get("/", (req, res) => {
 });
 
 router.get('/registros', controller.getAllRegistros);
-// router.post('/', userController.createUser);
+
 
 module.exports = router;

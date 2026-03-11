@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "mysql2": "^3.19.1",
     "nodemon": "^3.1.14",
@@ -12,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/app.js"
   },
-  "author": "",
+  "author": "Amaya",
   "license": "ISC",
   "description": ""
 }
