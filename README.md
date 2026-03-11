@@ -1,4 +1,4 @@
 # Dependencias
 
 ```
-npm install express mysql2 nodemon sequelize
+npm install express mysql2 nodemon sequelize dotenv
