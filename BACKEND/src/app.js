@@ -8,10 +8,6 @@ const ip = "localhost";
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 // Registrar modelos antes de sincronizar la base de datos
 require("./models/registroModel");
 
