@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const controller = require('../controller/controller');
+const proxyControlador = require('../proxy/proxyControlador');
 
-router.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+//ver registros
+router.get('/registros', proxyControlador.obtenerRegistros);
 
-router.get('/registros', controller.getAllRegistros);
-
+//crear registros
+router.post('/crearregistro', proxyControlador.crearRegistro);
 
 module.exports = router;

@@ -5,6 +5,8 @@ if (!sequelize) {
   throw new Error("Error: La conexión con la base de datos no está definida");
 }
 
+//tabla de la bd
+
 const registro = sequelize.define(
   "registro",
   {
