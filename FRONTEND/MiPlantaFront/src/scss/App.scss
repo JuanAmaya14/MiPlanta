@@ -2,7 +2,6 @@ $color1: #004f39;
 $color2: #151613;
 $color3: #fffaca;
 
-
 .seccionDatos {
   text-align: center;
 }
@@ -16,12 +15,23 @@ $color3: #fffaca;
   background-color: $color1;
 }
 
+.card-header h3,
+.card-header span {
+  display: inline;
+}
+
+.card-header span {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
 .seccionDatos .card-body {
   background-color: $color2;
 }
 
 .seccionDatos p,
-.seccionDatos h3 {
+.seccionDatos h3,
+.seccionDatos span {
   color: $color3 !important;
 }
 
