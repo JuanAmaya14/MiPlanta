@@ -1,0 +1,15 @@
+@import "../variables";
+
+header nav {
+  background-color: $color1;
+}
+
+.navbar,
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: $color3 !important;
+}
+
+.nav-item:hover {
+  border-bottom: 1px solid $color3;
+}

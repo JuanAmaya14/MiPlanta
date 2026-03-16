@@ -1,45 +1,4 @@
-$color1: #004f39;
-$color2: #151613;
-$color3: #fffaca;
-
-.seccionDatos {
-  text-align: center;
-}
-
-.seccionDatos .card {
-  display: inline-block;
-  margin: 0 0.5rem;
-}
-
-.seccionDatos .card-header {
-  background-color: $color1;
-}
-
-.card-header h3,
-.card-header span {
-  display: inline;
-}
-
-.card-header span {
-  font-size: 2rem;
-  margin-left: 1rem;
-}
-
-.seccionDatos .card-body {
-  background-color: $color2;
-}
-
-.seccionDatos p,
-.seccionDatos h3,
-.seccionDatos span {
-  color: $color3 !important;
-}
-
-.seccionDatos h1 {
-  color: $color3;
-  background-color: $color1;
-  border-radius: 10px;
-}
+@import "variables";
 
 body {
   background-color: $color3;
@@ -51,23 +10,4 @@ body {
 
 main {
   flex: 1;
-}
-
-footer {
-  background-color: $color2;
-  color: $color3;
-}
-
-header nav {
-  background-color: $color1;
-}
-
-.navbar,
-.navbar .navbar-brand,
-.navbar .nav-link {
-  color: $color3 !important;
-}
-
-.nav-item:hover {
-  border-bottom: 1px solid $color3;
 }

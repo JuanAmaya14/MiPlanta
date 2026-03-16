@@ -1,0 +1,40 @@
+@import "../variables";
+
+.seccionDatos {
+  text-align: center;
+}
+
+.seccionDatos .card {
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+.seccionDatos .card-header {
+  background-color: $color1;
+}
+
+.seccionDatos .card-body {
+  background-color: $color2;
+}
+
+.seccionDatos p,
+.seccionDatos h3,
+.seccionDatos span {
+  color: $color3 !important;
+}
+
+.seccionDatos h1 {
+  color: $color3;
+  background-color: $color1;
+  border-radius: 10px;
+}
+
+.card-header h3,
+.card-header span {
+  display: inline;
+}
+
+.card-header span {
+  font-size: 2rem;
+  margin-left: 1rem;
+}

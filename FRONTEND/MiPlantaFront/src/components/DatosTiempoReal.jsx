@@ -1,3 +1,5 @@
+import "../scss/components/DatosTiempoReal.scss";
+
 function DatosTiempoReal() {
   return (
     <>
