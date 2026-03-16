@@ -1,3 +1,8 @@
+$color1: #004f39;
+$color2: #151613;
+$color3: #fffaca;
+
+
 .seccionDatos {
   text-align: center;
 }
@@ -8,29 +13,30 @@
 }
 
 .seccionDatos .card-header {
-  background-color: #004f39;
+  background-color: $color1;
 }
 
 .seccionDatos .card-body {
-  background-color: #151613;
+  background-color: $color2;
 }
 
 .seccionDatos p,
 .seccionDatos h3 {
-  color: #fffaca !important;
+  color: $color3 !important;
 }
 
 .seccionDatos h1 {
-  color: #fffaca;
-  background-color: #004f39;
+  color: $color3;
+  background-color: $color1;
   border-radius: 10px;
 }
 
 body {
-  background-color: #fffaca;
+  background-color: $color3;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 main {
@@ -38,20 +44,20 @@ main {
 }
 
 footer {
-  background-color: #151613;
-  color: #fffaca;
+  background-color: $color2;
+  color: $color3;
 }
 
 header nav {
-  background-color: #004f39;
+  background-color: $color1;
 }
 
 .navbar,
 .navbar .navbar-brand,
 .navbar .nav-link {
-  color: #fffaca !important;
+  color: $color3 !important;
 }
 
 .nav-item:hover {
-  border-bottom: 1px solid #fffaca;
+  border-bottom: 1px solid $color3;
 }

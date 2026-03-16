@@ -1,4 +1,4 @@
-import "./App.css";
+import "./scss/App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Principal from "./pages/Principal.jsx";
 import Graficos from "./pages/PaginaGraficos.jsx";
