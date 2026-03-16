@@ -5,7 +5,9 @@ function PaginaGraficos() {
   return (
     <>
       <Header />
-      <p>Pagina de graficos pa</p>
+      <main class="container">
+        <p>Pagina de graficos pa</p>
+      </main>
       <Footer />
     </>
   );
