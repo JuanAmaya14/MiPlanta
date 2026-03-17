@@ -24,5 +24,13 @@ BEGIN
     SELECT * FROM registro WHERE idRegistro = p_idRegistro;
 END $$
 
+CREATE PROCEDURE UltimoRegistro()
+BEGIN
+    SELECT *
+    FROM registro
+    ORDER BY fecha DESC
+    LIMIT 1;
+END $$
+
 
 DELIMITER ;

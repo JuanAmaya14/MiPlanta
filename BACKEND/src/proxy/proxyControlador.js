@@ -29,7 +29,20 @@ const crearRegistro = async (req, res) => {
   }
 };
 
+const obtenerUltimoRegistro = async (req, res) => {
+  try {
+    const registro = await controller.getUltimoRegistro();
+    res.json(registro);
+  } catch (error) {
+    console.error("Error en el controlador:", error);
+    res
+      .status(500)
+      .json({ mensaje: "Error al obtener el ultimo registro", error: error.message });
+  }
+};
+
 module.exports = {
   obtenerRegistros,
   crearRegistro,
+  obtenerUltimoRegistro
 };

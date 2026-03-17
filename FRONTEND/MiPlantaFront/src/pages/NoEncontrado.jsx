@@ -6,7 +6,7 @@ function NoEncontrado() {
     <>
       <Header />
 
-      <main class="container">
+      <main className="container">
         <div className="not-found">
           <h1>Error 404 - Pagina no encontrada</h1>
           <p>Esta pagina es lost media pa</p>

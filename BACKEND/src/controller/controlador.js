@@ -29,7 +29,18 @@ const postRegistro = async (registro) => {
   }
 };
 
+const getUltimoRegistro = async () => {
+  try {
+    const resultado = await sequelize.query("CALL UltimoRegistro;");
+    return resultado;
+  } catch (error) {
+    console.error("Error en getAllRegistros:", error);
+    throw error;
+  }
+};
+
 module.exports = {
   getAllRegistros,
   postRegistro,
+  getUltimoRegistro
 };
