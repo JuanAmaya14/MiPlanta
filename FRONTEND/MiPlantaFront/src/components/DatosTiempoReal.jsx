@@ -1,7 +1,7 @@
 import "../scss/components/DatosTiempoReal.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-const URL = `http://${import.meta.env.VITE_BACK_HOST}:${import.meta.env.VITE_BACK_PORT}`
+const URL = `http://${import.meta.env.VITE_BACK_HOST}:${import.meta.env.VITE_BACK_PORT}`;
 
 function DatosTiempoReal() {
   const ObtenerUltimoDato = async () => {
@@ -19,6 +19,12 @@ function DatosTiempoReal() {
 
   useEffect(() => {
     ObtenerUltimoDato();
+
+    const intervalo = setInterval(() => {
+      ObtenerUltimoDato();
+    }, 60000);
+
+    return () => clearInterval(intervalo);
   }, []);
 
   return (
