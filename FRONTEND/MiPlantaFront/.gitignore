@@ -1,3 +1,9 @@
+
+# environment variable files
+.env
+.env.*
+!.env.example
+
 # Logs
 logs
 *.log
@@ -22,8 +28,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# environment variable files
-.env
-.env.*
-!.env.example
