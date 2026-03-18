@@ -1,12 +1,13 @@
 import Footer from "../components/Footer";
+import FormGraficos from "../components/FormGraficos";
 import Header from "../components/Header";
 
 function PaginaGraficos() {
   return (
     <>
       <Header />
-      <main class="container">
-        <p>Pagina de graficos pa</p>
+      <main className="container">
+        <FormGraficos />
       </main>
       <Footer />
     </>
