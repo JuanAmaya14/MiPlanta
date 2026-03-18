@@ -1,13 +1,14 @@
 import { useState } from "react";
+import GenerarGrafico from "./GenerarGrafico";
 
 function FormGraficos() {
   const [tipoDato, setTipoDato] = useState("");
   const [ultimosDias, setUltimosDias] = useState("");
+  const [mostrarGrafico, setMostrarGrafico] = useState(false);
 
   const Obtenerdato = (e) => {
-    e.preventDefault(); // evita recargar la página
-    console.log(tipoDato);
-    console.log(ultimosDias);
+    e.preventDefault();
+    setMostrarGrafico(true);
   };
 
   return (
@@ -50,8 +51,11 @@ function FormGraficos() {
           </button>
         </form>
 
-        
+        {mostrarGrafico && (
+          <GenerarGrafico tipoDato={tipoDato} ultimosDias={ultimosDias} />
+        )}
 
+        <br />  
       </main>
     </>
   );
