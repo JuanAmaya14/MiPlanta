@@ -1,0 +1,24 @@
+@use "../variables" as *;
+
+.divFormulario label {
+  background-color: $color2;
+  color: $color3;
+  border: 1px solid $color1;
+}
+
+.divFormulario input,
+.divFormulario select {
+  background-color: $color3;
+  color: $color2;
+  border: 1px solid $color1;
+}
+
+.colorBoton {
+  background-color: $color1;
+  color: $color3;
+}
+
+.colorBoton:hover {
+  background-color: $color2;
+  color: $color3;
+}

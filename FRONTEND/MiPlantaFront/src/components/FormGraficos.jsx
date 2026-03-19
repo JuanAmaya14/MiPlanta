@@ -1,5 +1,6 @@
 import { useState } from "react";
 import GenerarGrafico from "./GenerarGrafico";
+import "../scss/components/FormGraficos.scss";
 
 function FormGraficos() {
   const [tipoDato, setTipoDato] = useState("");
@@ -8,6 +9,15 @@ function FormGraficos() {
 
   const Obtenerdato = (e) => {
     e.preventDefault();
+    if (!tipoDato || tipoDato === "0") {
+      alert("Selecciona un tipo de dato");
+      return;
+    }
+
+    if (!ultimosDias || ultimosDias <= 0) {
+      alert("Ingresa un número de días válido, no puede ser 0");
+      return;
+    }
     setMostrarGrafico(true);
   };
 
@@ -15,7 +25,7 @@ function FormGraficos() {
     <>
       <main className="container">
         <form>
-          <div className="input-group mb-3">
+          <div className="divFormulario input-group mb-3">
             <label className="input-group-text" htmlFor="inputGroupSelect01">
               Tipo de dato
             </label>
@@ -30,24 +40,28 @@ function FormGraficos() {
               <option value="1">Humedad</option>
               <option value="2">Temperatura</option>
             </select>
-          </div>
 
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="inputGroup-sizing-default">
+            <label
+              className="input-group-text"
+              id="inputGroup-sizing-default"
+              htmlFor="inputNumber"
+            >
               Ultimos dias
-            </span>
+            </label>
             <input
+              id="inputNumber"
               type="number"
               className="form-control"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-default"
               value={ultimosDias}
               onChange={(e) => setUltimosDias(e.target.value)}
+              required
             />
           </div>
 
-          <button onClick={Obtenerdato} type="button" className="btn btn-light">
-            Light
+          <button onClick={Obtenerdato} className="colorBoton btn">
+            Generar grafico
           </button>
         </form>
 
@@ -55,7 +69,7 @@ function FormGraficos() {
           <GenerarGrafico tipoDato={tipoDato} ultimosDias={ultimosDias} />
         )}
 
-        <br />  
+        <br />
       </main>
     </>
   );

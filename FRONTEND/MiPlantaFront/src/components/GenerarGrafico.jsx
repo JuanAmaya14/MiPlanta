@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
+import axios from "axios";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -23,26 +24,40 @@ ChartJS.register(
   Legend,
 );
 
-function generarFechaAleatoria(inicio, fin) {
-  const startTimestamp = inicio.getTime();
-  const endTimestamp = fin.getTime();
+const URL = `http://${import.meta.env.VITE_BACK_HOST}:${import.meta.env.VITE_BACK_PORT}`;
 
-  const randomTimestamp = Math.floor(
-    Math.random() * (endTimestamp - startTimestamp + 1) + startTimestamp,
-  );
-
-  return new Date(randomTimestamp);
+function formatearFecha(fecha) {
+  return new Date(fecha).toLocaleString("es-ES", {
+    dateStyle: "short",
+    timeStyle: "short",
+  });
 }
-const GenerarGrafico = ({ tipoDato, ultimosDias }) => {
-  const [valores] = useState(() =>
-    Array.from({ length: ultimosDias }, () => Math.floor(Math.random() * 100)),
-  );
 
-  const [fechas] = useState(() =>
-    Array.from({ length: ultimosDias }, () =>
-      generarFechaAleatoria(new Date(2025, 0, 1), new Date()),
-    ),
-  );
+const GenerarGrafico = ({ tipoDato, ultimosDias }) => {
+  const [datos, setDatos] = useState([]);
+
+  const ObtenerDatos = async () => {
+    try {
+      const resultado = await axios.get(`${URL}/datosGrafica`, {
+        params: {
+          tipoDato,
+          ultimosDias,
+        },
+      });
+      setDatos({
+        fecha: resultado.data.map((d) => formatearFecha(d.fecha)),
+        dato: resultado.data.map((d) => d.humedad ?? d.temperatura),
+      });
+    } catch (error) {
+      console.error("Error submitting post:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (tipoDato && ultimosDias) {
+      ObtenerDatos();
+    }
+  }, [tipoDato, ultimosDias]);
 
   const tipoDatoInt = parseInt(tipoDato);
   let tipoDatoString = "";
@@ -54,19 +69,16 @@ const GenerarGrafico = ({ tipoDato, ultimosDias }) => {
     case 2:
       tipoDatoString = "temperatura (°C)";
       break;
-    default:
-      console.log("ola");
-      break;
   }
 
   const data = {
-    labels: fechas,
+    labels: datos.fecha,
     datasets: [
       {
         label: `${tipoDatoString}`,
-        data: valores,
-        backgroundColor: "rgba(75, 192, 192, 0.5)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        data: datos.dato,
+        backgroundColor: "#004f39",
+        borderColor: "#151613",
         borderWidth: 1,
       },
     ],

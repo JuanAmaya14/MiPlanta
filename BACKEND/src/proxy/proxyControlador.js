@@ -37,12 +37,31 @@ const obtenerUltimoRegistro = async (req, res) => {
     console.error("Error en el controlador:", error);
     res
       .status(500)
-      .json({ mensaje: "Error al obtener el ultimo registro", error: error.message });
+      .json({
+        mensaje: "Error al obtener el ultimo registro",
+        error: error.message,
+      });
+  }
+};
+
+const DatosParaGrafica = async (req, res) => {
+  try {
+    const resultado = await controller.getDatosGrafica(req.query);
+    if (resultado.error) {
+      return res.status(400).json({ mensaje: resultado.error });
+    }
+    res.status(200).json(resultado);
+  } catch (error) {
+    res.status(500).json({
+      mensaje: "Error al consultar los datos para la grafica",
+      error: error.message || error,
+    });
   }
 };
 
 module.exports = {
   obtenerRegistros,
   crearRegistro,
-  obtenerUltimoRegistro
+  obtenerUltimoRegistro,
+  DatosParaGrafica,
 };

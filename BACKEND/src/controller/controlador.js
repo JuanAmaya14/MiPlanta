@@ -39,8 +39,27 @@ const getUltimoRegistro = async () => {
   }
 };
 
+const getDatosGrafica = async (datos) => {
+  const { tipoDato, ultimosDias } = datos;
+
+  try {
+    const resultados = await sequelize.query(
+      "CALL obtenerDatosUltimosDias(?, ?)",
+      {
+        replacements: [tipoDato, ultimosDias],
+      },
+    );
+
+    return resultados || null;
+  } catch (error) {
+    console.error("Error en obtenerDatosUltimosDias (SP):", error);
+    throw error;
+  }
+};
+
 module.exports = {
   getAllRegistros,
   postRegistro,
-  getUltimoRegistro
+  getUltimoRegistro,
+  getDatosGrafica,
 };

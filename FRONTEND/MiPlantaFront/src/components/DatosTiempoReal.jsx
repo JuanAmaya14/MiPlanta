@@ -35,7 +35,6 @@ function DatosTiempoReal() {
 
           <div
             className="card text-bg-light mb-3"
-            style={{ maxWidth: "18rem" }}
           >
             <div className="card-header">
               <h3>Temperatura</h3>
