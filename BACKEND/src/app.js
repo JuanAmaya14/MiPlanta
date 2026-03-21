@@ -34,7 +34,7 @@ async function IniciarApp() {
 
     app.use("/", rutas);
 
-    app.listen(app.get("AppPort"), () => {
+    app.listen(app.get("AppPort"), app.get("AppHost"), () => {
       console.log(
         `Servidor corriendo en: http://${app.get("AppHost")}:${app.get("AppPort")}`,
       );
