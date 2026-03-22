@@ -11,6 +11,19 @@ npm install express mysql2 nodemon sequelize dotenv cors
 ```
 npm install react-router-dom sass react-chartjs-2 chart.js
 ```
+### Para construir el frontend y hostearlo en la raspberry
+instalar serve
+```
+npm install serve
+```
+Construitr el proyecto
+```
+npm run build
+```
+Por ultimo, ejecutarlo
+```
+npx serve -s dist -l (puerto)
+```
 
 ## RaspberrySensores.py (para leer datos directamente en la raspberry)
 
@@ -120,6 +133,5 @@ source .venv/bin/activate
 ## Hardware
 
 <div>
-  <img width="50" src="https://pbs.twimg.com/profile_images/773245254979903488/yB0xE3NR_400x400.jpg" alt="Bootstrap" title="esp32"/>
   <img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/raspberri_pi.png" alt="Raspberri Pi" title="Raspberri Pi"/>
 </div>
