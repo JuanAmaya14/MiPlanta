@@ -12,6 +12,13 @@ npm install express mysql2 nodemon sequelize dotenv cors
 npm install react-router-dom sass react-chartjs-2 chart.js
 ```
 
+## RaspberrySensores.py (para leer datos directamente en la raspberry)
+
+```
+python -m venv .venv
+pip install -r requirements.txt
+```
+
 # Tecnologias
 
 ## Backend

@@ -16,7 +16,7 @@ const int valorAgua = 1730;
 const char* ssid = "";
 const char* password = "";
 
-const char* serverName = "http://####:####/crearregistro";
+const char* serverName = "http://###:###/crearregistro";
 
 unsigned long lastTime = 0;
 
@@ -25,10 +25,10 @@ unsigned long timerDelay = 1000;
 MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 
 
-String getLecturaHumedad() {
+int getLecturaHumedad() {
   int humedadValor = analogRead(humedadPin);
   int humedad = constrain(map(humedadValor, valorAire, valorAgua, 0, 100), 0, 100);
-  return String(humedad);
+  return humedad;
 }
 
 
@@ -64,7 +64,7 @@ void loop() {
 
       String jsonData = "{";
       jsonData += "\"temperatura\":" + String(temperatura) + ",";
-      jsonData += "\"humedad\":" + getLecturaHumedad();
+      jsonData += "\"humedad\":" + String(getLecturaHumedad());
       jsonData += "}";
 
       http.addHeader("Content-Type", "application/json");
@@ -72,6 +72,10 @@ void loop() {
 
       Serial.print("HTTP Response code: ");
       Serial.println(httpResponseCode);
+      Serial.println(String(temperatura));
+      Serial.println(String(getLecturaHumedad()));
+      Serial.println(getLecturaHumedad());
+      Serial.println("'''''''''''''''''''''''");
 
       http.end();
     } else {
