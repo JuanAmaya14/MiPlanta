@@ -2,7 +2,7 @@ import spidev
 import time
 
 spi = spidev.SpiDev()
-spi.open(0, 0)  # bus 0, CE0
+spi.open(0, 0)
 spi.max_speed_hz = 5000000
 
 def leer_temp():
@@ -10,11 +10,10 @@ def leer_temp():
 
     value = (data[0] << 8) | data[1]
 
-    # Verificar si la termocupla está conectada
+    # Verificar si la termocupla esta conectada
     if value & 0x4:
         return None
 
-    # Extraer temperatura
     temp = (value >> 3) * 0.25
     return temp
 
