@@ -18,6 +18,14 @@ npm install react-router-dom sass react-chartjs-2 chart.js
 python -m venv .venv
 pip install -r requirements.txt
 ```
+### Para entrar al .venv en Windows
+```
+.venv\Scripts\Activate.ps1
+```
+### Para entrar al .venv en Linux
+```
+source .venv/bin/activate
+```
 
 # Tecnologias
 
