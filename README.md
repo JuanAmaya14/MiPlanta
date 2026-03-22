@@ -18,14 +18,80 @@ npm install react-router-dom sass react-chartjs-2 chart.js
 python -m venv .venv
 pip install -r requirements.txt
 ```
+
 ### Para entrar al .venv en Windows
+
 ```
 .venv\Scripts\Activate.ps1
 ```
+
 ### Para entrar al .venv en Linux
+
 ```
 source .venv/bin/activate
 ```
+
+# Conexiones de los sensores al Raspberry
+
+<img width="600" src="https://cdn.shopify.com/s/files/1/0195/1344/2404/files/pi-5-diagram.jpg?v=1762784407" alt="Raspberry Pinout" />
+
+## Conexion con el sensor de humedad
+
+<table>
+    <tr>
+        <th>Raspberry</th>
+        <th>ADS1115</th>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>SDA</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>SCL</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>V</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>G</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>A0 al sensor</td>
+    </tr>
+</table>
+
+## Conexion con el sensor de temperatura (Termocupla tipo K)
+
+<table>
+    <tr>
+        <th>Raspberry</th>
+        <th>MAX6675</th>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>GND</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>VCC</td>
+    </tr>
+    <tr>
+        <td>23</td>
+        <td>SCK</td>
+    </tr>
+    <tr>
+        <td>24</td>
+        <td>CS</td>
+    </tr>
+    <tr>
+        <td>21</td>
+        <td>SO</td>
+    </tr>
+</table>
 
 # Tecnologias
 
