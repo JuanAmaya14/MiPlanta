@@ -9,7 +9,8 @@ const sequelize = new Sequelize(
   process.env.DB_CONTRASENHA,
   {
     host: process.env.DB_HOST,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    timezone: "-05:00",
   }
 );
 

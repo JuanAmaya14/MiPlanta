@@ -24,7 +24,7 @@ const postRegistro = async (registro) => {
       resultado: result || null,
     };
   } catch (error) {
-    console.error("Error en postRegistro (SP):", error);
+    console.error("Error en postRegistro:", error);
     throw error;
   }
 };
@@ -40,19 +40,19 @@ const getUltimoRegistro = async () => {
 };
 
 const getDatosGrafica = async (datos) => {
-  const { tipoDato, ultimosDias } = datos;
+  const { tipoDato, fecha1, fecha2 } = datos;
 
   try {
     const resultados = await sequelize.query(
-      "CALL obtenerDatosUltimosDias(?, ?)",
+      "CALL obtenerDatosPorRango(?, ?, ?)",
       {
-        replacements: [tipoDato, ultimosDias],
+        replacements: [tipoDato, fecha1, fecha2],
       },
     );
 
     return resultados || null;
   } catch (error) {
-    console.error("Error en obtenerDatosUltimosDias (SP):", error);
+    console.error("Error en obtenerDatosPorRango:", error);
     throw error;
   }
 };

@@ -11,12 +11,14 @@ function formatearFecha(fecha) {
 
 function FormGraficos() {
   const [tipoDato, setTipoDato] = useState("");
-  const [ultimosDias, setUltimosDias] = useState("");
+  const [fecha1, setFecha1] = useState("");
+  const [fecha2, setFecha2] = useState("");
   const [mostrarGrafico, setMostrarGrafico] = useState(false);
   const [rangoFechas, setRangoFechas] = useState({
     fechaMinima: "",
     fechaMaxima: "",
   });
+
   const LimiteFechas = async () => {
     try {
       const resultado = await axios.get(`${URL}/rangoFechas`);
@@ -41,8 +43,13 @@ function FormGraficos() {
       return;
     }
 
-    if (!ultimosDias || ultimosDias <= 0) {
-      alert("Ingresa un número de días válido, no puede ser 0");
+    if (!fecha1 || fecha1 === "") {
+      alert("Selecciona la primera fecha");
+      return;
+    }
+
+    if (!fecha2 || fecha2 === "") {
+      alert("Selecciona la segunda fecha");
       return;
     }
     setMostrarGrafico(true);
@@ -67,26 +74,8 @@ function FormGraficos() {
               <option value="1">Humedad</option>
               <option value="2">Temperatura</option>
             </select>
-
-            <label
-              className="input-group-text"
-              id="inputGroup-sizing-default"
-              htmlFor="inputNumber"
-            >
-              Ultimos dias
-            </label>
-            <input
-              id="inputNumber"
-              type="number"
-              className="form-control"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-default"
-              value={ultimosDias}
-              onChange={(e) => setUltimosDias(e.target.value)}
-              required
-            />
           </div>
-          <div className="input-group mb-3">
+          <div className="divFormulario input-group mb-3">
             <label
               className="input-group-text"
               id="basic-addon1"
@@ -103,6 +92,9 @@ function FormGraficos() {
               aria-describedby="basic-addon1"
               min={rangoFechas.fechaMinima}
               max={rangoFechas.fechaMaxima}
+              value={fecha1}
+              onChange={(e) => setFecha1(e.target.value)}
+              required
             />
             <label
               className="input-group-text"
@@ -120,6 +112,9 @@ function FormGraficos() {
               aria-describedby="basic-addon1"
               min={rangoFechas.fechaMinima}
               max={rangoFechas.fechaMaxima}
+              value={fecha2}
+              onChange={(e) => setFecha2(e.target.value)}
+              required
             />
           </div>
 
@@ -129,7 +124,7 @@ function FormGraficos() {
         </form>
 
         {mostrarGrafico && (
-          <GenerarGrafico tipoDato={tipoDato} ultimosDias={ultimosDias} />
+          <GenerarGrafico tipoDato={tipoDato} fecha1={fecha1} fecha2={fecha2} />
         )}
 
         <br />

@@ -33,7 +33,7 @@ function formatearFecha(fecha) {
   });
 }
 
-const GenerarGrafico = ({ tipoDato, ultimosDias }) => {
+const GenerarGrafico = ({ tipoDato, fecha1, fecha2 }) => {
   const [datos, setDatos] = useState([]);
 
   const ObtenerDatos = async () => {
@@ -41,7 +41,8 @@ const GenerarGrafico = ({ tipoDato, ultimosDias }) => {
       const resultado = await axios.get(`${URL}/datosGrafica`, {
         params: {
           tipoDato,
-          ultimosDias,
+          fecha1,
+          fecha2,
         },
       });
       setDatos({
@@ -54,10 +55,10 @@ const GenerarGrafico = ({ tipoDato, ultimosDias }) => {
   };
 
   useEffect(() => {
-    if (tipoDato != 0 && ultimosDias != 0) {
+    if (tipoDato != 0 && fecha1 != "" && fecha2 != "") {
       ObtenerDatos();
     }
-  }, [tipoDato, ultimosDias]);
+  }, [tipoDato, fecha1, fecha2]);
 
   const tipoDatoInt = parseInt(tipoDato);
   let tipoDatoString = "";
@@ -90,7 +91,7 @@ const GenerarGrafico = ({ tipoDato, ultimosDias }) => {
       legend: { position: "top" },
       title: {
         display: true,
-        text: `La ${tipoDatoString} en los ultimos ${ultimosDias} dias.`,
+        text: `La ${tipoDatoString} entre los dias ${fecha1} y ${fecha2}.`,
       },
     },
   };

@@ -9,7 +9,6 @@ function DatosTiempoReal() {
       const resultado = await axios.get(`${URL}/ultimoregistro`);
       const { data } = resultado;
       setDatos(resultado.data[0]);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -33,9 +32,7 @@ function DatosTiempoReal() {
         <section key={datos} className="seccionDatos">
           <h1>Datos de la tierra en tiempo real.</h1>
 
-          <div
-            className="card text-bg-light mb-3"
-          >
+          <div className="card text-bg-light mb-3">
             <div className="card-header">
               <h3>Temperatura</h3>
               <span className="material-symbols-outlined">

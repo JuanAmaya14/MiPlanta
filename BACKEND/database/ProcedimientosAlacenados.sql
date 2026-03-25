@@ -32,9 +32,10 @@ BEGIN
     LIMIT 1;
 END $$
 
-CREATE PROCEDURE obtenerDatosUltimosDias(
+CREATE PROCEDURE obtenerDatosPorRango(
     IN tipoDato INT,
-    IN ultimosDias INT
+    IN fechaInicio DATETIME,
+    IN fechaFin DATETIME
 )
 BEGIN
     DECLARE columna VARCHAR(20);
@@ -48,19 +49,22 @@ BEGIN
         SET MESSAGE_TEXT = 'Tipo de dato inválido. Use 1 o 2.';
     END IF;
 
-    -- IMPORTANTE: usar variable de usuario @sql_query
     SET @sql_query = CONCAT(
         'SELECT fecha, ', columna, ' 
          FROM registro 
-         WHERE fecha >= NOW() - INTERVAL ', ultimosDias, ' DAY
+         WHERE fecha BETWEEN ? AND ?
          ORDER BY fecha ASC'
     );
 
     PREPARE stmt FROM @sql_query;
-    EXECUTE stmt;
-    DEALLOCATE PREPARE stmt;
 
-END$$
+    SET @fechaInicio = fechaInicio;
+    SET @fechaFin = fechaFin;
+
+    EXECUTE stmt USING @fechaInicio, @fechaFin;
+
+    DEALLOCATE PREPARE stmt;
+END $$
 
 CREATE PROCEDURE ObtenerRangoFechas()
 BEGIN
