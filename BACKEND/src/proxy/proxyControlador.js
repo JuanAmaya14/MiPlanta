@@ -59,9 +59,25 @@ const DatosParaGrafica = async (req, res) => {
   }
 };
 
+const obtenerRangoFechas = async (req, res) => {
+  try {
+    const registro = await controller.getRangoFechas();
+    res.json(registro);
+  } catch (error) {
+    console.error("Error en el controlador:", error);
+    res
+      .status(500)
+      .json({
+        mensaje: "Error al obtener el rango de fechas",
+        error: error.message,
+      });
+  }
+};
+
 module.exports = {
   obtenerRegistros,
   crearRegistro,
   obtenerUltimoRegistro,
   DatosParaGrafica,
+  obtenerRangoFechas
 };

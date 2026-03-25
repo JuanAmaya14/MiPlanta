@@ -62,5 +62,12 @@ BEGIN
 
 END$$
 
+CREATE PROCEDURE ObtenerRangoFechas()
+BEGIN
+    SELECT 
+        MAX(fecha) AS fechaMaxima,
+        MIN(fecha) AS fechaMinima
+    FROM registro;
+END $$
 
 DELIMITER ;

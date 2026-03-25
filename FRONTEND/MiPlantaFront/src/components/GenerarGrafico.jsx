@@ -49,12 +49,12 @@ const GenerarGrafico = ({ tipoDato, ultimosDias }) => {
         dato: resultado.data.map((d) => d.humedad ?? d.temperatura),
       });
     } catch (error) {
-      console.error("Error submitting post:", error);
+      console.error(error);
     }
   };
 
   useEffect(() => {
-    if (tipoDato && ultimosDias) {
+    if (tipoDato != 0 && ultimosDias != 0) {
       ObtenerDatos();
     }
   }, [tipoDato, ultimosDias]);

@@ -1,11 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GenerarGrafico from "./GenerarGrafico";
 import "../scss/components/FormGraficos.scss";
+import axios from "axios";
+
+const URL = `http://${import.meta.env.VITE_BACK_HOST}:${import.meta.env.VITE_BACK_PORT}`;
+
+function formatearFecha(fecha) {
+  return fecha.split("T")[0];
+}
 
 function FormGraficos() {
   const [tipoDato, setTipoDato] = useState("");
   const [ultimosDias, setUltimosDias] = useState("");
   const [mostrarGrafico, setMostrarGrafico] = useState(false);
+  const [rangoFechas, setRangoFechas] = useState({
+    fechaMinima: "",
+    fechaMaxima: "",
+  });
+  const LimiteFechas = async () => {
+    try {
+      const resultado = await axios.get(`${URL}/rangoFechas`);
+      const { data } = resultado;
+      setRangoFechas({
+        fechaMinima: formatearFecha(resultado.data[0].fechaMinima),
+        fechaMaxima: formatearFecha(resultado.data[0].fechaMaxima),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    LimiteFechas();
+  }, []);
 
   const Obtenerdato = (e) => {
     e.preventDefault();
@@ -57,6 +84,42 @@ function FormGraficos() {
               value={ultimosDias}
               onChange={(e) => setUltimosDias(e.target.value)}
               required
+            />
+          </div>
+          <div className="input-group mb-3">
+            <label
+              className="input-group-text"
+              id="basic-addon1"
+              htmlFor="fechaInicio"
+            >
+              Desde...
+            </label>
+            <input
+              id="fechaInicio"
+              type="date"
+              className="form-control"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+              min={rangoFechas.fechaMinima}
+              max={rangoFechas.fechaMaxima}
+            />
+            <label
+              className="input-group-text"
+              id="basic-addon1"
+              htmlFor="fechaFin"
+            >
+              Hasta...
+            </label>
+            <input
+              id="fechaFin"
+              type="date"
+              className="form-control"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+              min={rangoFechas.fechaMinima}
+              max={rangoFechas.fechaMaxima}
             />
           </div>
 

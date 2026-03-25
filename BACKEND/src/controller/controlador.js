@@ -57,9 +57,20 @@ const getDatosGrafica = async (datos) => {
   }
 };
 
+const getRangoFechas = async () => {
+  try {
+    const resultado = await sequelize.query("CALL ObtenerRangoFechas;");
+    return resultado;
+  } catch (error) {
+    console.error("Error en ObtenerRangoFechas:", error);
+    throw error;
+  }
+};
+
 module.exports = {
   getAllRegistros,
   postRegistro,
   getUltimoRegistro,
   getDatosGrafica,
+  getRangoFechas,
 };
