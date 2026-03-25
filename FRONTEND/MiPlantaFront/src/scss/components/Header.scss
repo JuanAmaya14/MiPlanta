@@ -13,3 +13,7 @@ header nav {
 .nav-item:hover {
   border-bottom: 1px solid $color3;
 }
+
+.navbar button {
+  background-color: $color3;
+}
