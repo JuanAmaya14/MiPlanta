@@ -36,6 +36,10 @@ function formatearFecha(fecha) {
 const GenerarGrafico = ({ tipoDato, fecha1, fecha2 }) => {
   const [datos, setDatos] = useState([]);
 
+  if (tipoDato == "0") {
+    return null;
+  }
+
   const ObtenerDatos = async () => {
     try {
       const resultado = await axios.get(`${URL}/datosGrafica`, {

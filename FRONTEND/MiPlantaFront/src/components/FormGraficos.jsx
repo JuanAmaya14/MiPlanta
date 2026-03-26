@@ -68,7 +68,13 @@ function FormGraficos() {
               className="form-select"
               id="inputGroupSelect01"
               value={tipoDato}
-              onChange={(e) => setTipoDato(e.target.value)}
+              onChange={(e) => {
+                const valor = e.target.value;
+                setTipoDato(valor);
+                if (valor == "0") {
+                  setMostrarGrafico(false);
+                }
+              }}
             >
               <option value="0">Selecciona...</option>
               <option value="1">Humedad</option>
