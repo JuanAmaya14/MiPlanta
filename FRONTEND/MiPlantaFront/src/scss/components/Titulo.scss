@@ -1,0 +1,8 @@
+@use "../variables" as *;
+
+.tituloH1 {
+  color: $color3;
+  background-color: $color1;
+  border-radius: 10px;
+  text-align: center;
+}

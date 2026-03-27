@@ -38,6 +38,11 @@ function Header() {
                     Graficas
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/tabla">
+                    Tabla
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

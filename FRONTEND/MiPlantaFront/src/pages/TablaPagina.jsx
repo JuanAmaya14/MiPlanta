@@ -1,20 +1,21 @@
 import Footer from "../components/Footer";
-import FormGraficos from "../components/FormGraficos";
 import Header from "../components/Header";
+import TablaInfomracion from "../components/TablaInformacion";
 import Titulo from "../components/Titulo.jsx";
 
-function PaginaGraficos() {
+function Tabla() {
   return (
     <>
       <Header />
+
       <main className="container">
-        <Titulo titulo="Generador de grafico." />
-        <br />
-        <FormGraficos />
+        <Titulo titulo="Todos los datos de la tierra." />
+        <TablaInfomracion />
       </main>
+
       <Footer />
     </>
   );
 }
 
-export default PaginaGraficos;
+export default Tabla;

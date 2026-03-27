@@ -28,36 +28,27 @@ function DatosTiempoReal() {
 
   return (
     <>
-      <main className="container">
-        <section key={datos} className="seccionDatos">
-          <h1>Datos de la tierra en tiempo real.</h1>
-
-          <div className="card text-bg-light mb-3">
-            <div className="card-header">
-              <h3>Temperatura</h3>
-              <span className="material-symbols-outlined">
-                device_thermostat
-              </span>
-            </div>
-            <div className="card-body">
-              <p className="display-1">{datos.temperatura} &deg;C</p>
-            </div>
+      <section key={datos} className="seccionDatos">
+        <div className="card text-bg-light mb-3">
+          <div className="card-header">
+            <h3>Temperatura</h3>
+            <span className="material-symbols-outlined">device_thermostat</span>
           </div>
-
-          <div
-            className="card text-bg-light mb-3"
-            style={{ maxWidth: "18rem" }}
-          >
-            <div className="card-header">
-              <h3>Humedad</h3>
-              <span className="material-symbols-outlined">water_drop</span>
-            </div>
-            <div className="card-body">
-              <p className="display-1">{datos.humedad}&#37;</p>
-            </div>
+          <div className="card-body">
+            <p className="display-1">{datos.temperatura} &deg;C</p>
           </div>
-        </section>
-      </main>
+        </div>
+
+        <div className="card text-bg-light mb-3" style={{ maxWidth: "18rem" }}>
+          <div className="card-header">
+            <h3>Humedad</h3>
+            <span className="material-symbols-outlined">water_drop</span>
+          </div>
+          <div className="card-body">
+            <p className="display-1">{datos.humedad}&#37;</p>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
