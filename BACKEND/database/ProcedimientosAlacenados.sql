@@ -32,10 +32,11 @@ BEGIN
     LIMIT 1;
 END $$
 
-CREATE PROCEDURE obtenerDatosPorRango(
+CREATE PROCEDURE obtenerDatosParaGrafica(
     IN tipoDato INT,
     IN fechaInicio DATETIME,
-    IN fechaFin DATETIME
+    IN fechaFin DATETIME,
+    IN todoPromedio INT
 )
 BEGIN
     DECLARE columna VARCHAR(20);
@@ -49,12 +50,26 @@ BEGIN
         SET MESSAGE_TEXT = 'Tipo de dato inválido. Use 1 o 2.';
     END IF;
 
-    SET @sql_query = CONCAT(
-        'SELECT fecha, ', columna, ' 
-         FROM registro 
-         WHERE fecha BETWEEN ? AND ?
-         ORDER BY fecha ASC'
-    );
+    IF todoPromedio = 1 THEN
+        
+        SET @sql_query = CONCAT(
+            'SELECT fecha, ', columna, ' 
+             FROM registro 
+             WHERE DATE(fecha) BETWEEN DATE(?) AND DATE(?)
+             ORDER BY fecha ASC'
+        );
+
+    ELSE
+        
+        SET @sql_query = CONCAT(
+            'SELECT DATE(fecha) AS fecha, AVG(', columna, ') AS promedio
+             FROM registro
+             WHERE DATE(fecha) BETWEEN DATE(?) AND DATE(?)
+             GROUP BY DATE(fecha)
+             ORDER BY fecha ASC'
+        );
+
+    END IF;
 
     PREPARE stmt FROM @sql_query;
 
@@ -64,6 +79,7 @@ BEGIN
     EXECUTE stmt USING @fechaInicio, @fechaFin;
 
     DEALLOCATE PREPARE stmt;
+
 END $$
 
 CREATE PROCEDURE ObtenerRangoFechas()
@@ -72,6 +88,13 @@ BEGIN
         MAX(fecha) AS fechaMaxima,
         MIN(fecha) AS fechaMinima
     FROM registro;
+END $$
+
+CREATE PROCEDURE obtenerPromedios()
+BEGIN
+  SELECT AVG(humedad) AS promedioHumedad, 
+  AVG(temperatura) AS promedioTemperatura  
+  FROM registro;
 END $$
 
 DELIMITER ;

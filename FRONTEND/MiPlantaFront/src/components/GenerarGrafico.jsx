@@ -26,15 +26,19 @@ ChartJS.register(
 
 const URL = `http://${import.meta.env.VITE_BACK_HOST}:${import.meta.env.VITE_BACK_PORT}`;
 
-function formatearFecha(fecha) {
-  return new Date(fecha).toLocaleString("es-ES", {
-    dateStyle: "short",
-    timeStyle: "short",
-  });
+function formatearFecha(fecha, promedio) {
+  if (promedio == "1") {
+    return new Date(fecha).toLocaleString({
+      dateStyle: "short",
+      timeStyle: "short",
+    });
+  } else {
+    return fecha.split("T")[0];
+  }
 }
 
-const GenerarGrafico = ({ tipoDato, fecha1, fecha2 }) => {
-  const [datos, setDatos] = useState([]);
+const GenerarGrafico = ({ tipoDato, fecha1, fecha2, todoPromedio }) => {
+  const [datos, setDatos] = useState({ fecha: [], dato: [] });
 
   if (tipoDato == "0") {
     return null;
@@ -47,11 +51,14 @@ const GenerarGrafico = ({ tipoDato, fecha1, fecha2 }) => {
           tipoDato,
           fecha1,
           fecha2,
+          todoPromedio,
         },
       });
       setDatos({
-        fecha: resultado.data.map((d) => formatearFecha(d.fecha)),
-        dato: resultado.data.map((d) => d.humedad ?? d.temperatura),
+        fecha: resultado.data.map((d) => formatearFecha(d.fecha, todoPromedio)),
+        dato: resultado.data.map(
+          (d) => d.promedio ?? d.humedad ?? d.temperatura,
+        ),
       });
     } catch (error) {
       console.error(error);
@@ -59,20 +66,30 @@ const GenerarGrafico = ({ tipoDato, fecha1, fecha2 }) => {
   };
 
   useEffect(() => {
-    if (tipoDato != 0 && fecha1 != "" && fecha2 != "") {
+    if (tipoDato !== "0" && fecha1 !== "" && fecha2 !== "") {
       ObtenerDatos();
     }
-  }, [tipoDato, fecha1, fecha2]);
+  }, [tipoDato, fecha1, fecha2, todoPromedio]);
 
-  const tipoDatoInt = parseInt(tipoDato);
   let tipoDatoString = "";
 
-  switch (tipoDatoInt) {
-    case 1:
+  switch (tipoDato) {
+    case "1":
       tipoDatoString = "humedad (%)";
       break;
-    case 2:
+    case "2":
       tipoDatoString = "temperatura (°C)";
+      break;
+  }
+
+  let modoTexto = "";
+
+  switch (todoPromedio) {
+    case "0":
+      modoTexto = "todos los registros";
+      break;
+    case "1":
+      modoTexto = "promedio por dia";
       break;
   }
 
@@ -95,12 +112,31 @@ const GenerarGrafico = ({ tipoDato, fecha1, fecha2 }) => {
       legend: { position: "top" },
       title: {
         display: true,
-        text: `La ${tipoDatoString} entre los dias ${fecha1} y ${fecha2}.`,
+        text: `La ${tipoDatoString} entre el ${fecha1} y el ${fecha2} (${modoTexto}).`,
       },
     },
   };
 
-  return <Line data={data} options={options} />;
+  const backgroundPlugin = {
+  id: "customCanvasBackgroundColor",
+  beforeDraw: (chart) => {
+    const ctx = chart.canvas.getContext("2d");
+    ctx.save();
+    ctx.globalCompositeOperation = "destination-over";
+    ctx.fillStyle = "#fffaca";
+    ctx.fillRect(0, 0, chart.width, chart.height);
+    ctx.restore();
+  },
+};
+
+  return (
+    <Line
+      key={`${tipoDato}-${fecha1}-${fecha2}-${todoPromedio}`}
+      data={data}
+      options={options}
+      plugins={[backgroundPlugin]}
+    />
+  );
 };
 
 export default GenerarGrafico;

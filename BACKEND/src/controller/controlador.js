@@ -40,19 +40,19 @@ const getUltimoRegistro = async () => {
 };
 
 const getDatosGrafica = async (datos) => {
-  const { tipoDato, fecha1, fecha2 } = datos;
+  const { tipoDato, fecha1, fecha2, todoPromedio } = datos;
 
   try {
     const resultados = await sequelize.query(
-      "CALL obtenerDatosPorRango(?, ?, ?)",
+      "CALL obtenerDatosParaGrafica(?, ?, ?, ?)",
       {
-        replacements: [tipoDato, fecha1, fecha2],
+        replacements: [tipoDato, fecha1, fecha2, todoPromedio],
       },
     );
 
     return resultados || null;
   } catch (error) {
-    console.error("Error en obtenerDatosPorRango:", error);
+    console.error("Error en obtenerDatosParaGrafica:", error);
     throw error;
   }
 };
@@ -67,10 +67,21 @@ const getRangoFechas = async () => {
   }
 };
 
+const getPromedios = async () => {
+  try {
+    const resultados = await sequelize.query("CALL obtenerPromedios;");
+    return resultados;
+  } catch (error) {
+    console.error("Error en getAllRegistros:", error);
+    throw error;
+  }
+};
+
 module.exports = {
   getAllRegistros,
   postRegistro,
   getUltimoRegistro,
   getDatosGrafica,
   getRangoFechas,
+  getPromedios,
 };

@@ -10,7 +10,7 @@ function formatearFecha(fecha) {
 }
 
 function FormGraficos() {
-  const [tipoDato, setTipoDato] = useState("");
+  const [tipoDato, setTipoDato] = useState("0");
   const [fecha1, setFecha1] = useState("");
   const [fecha2, setFecha2] = useState("");
   const [mostrarGrafico, setMostrarGrafico] = useState(false);
@@ -18,6 +18,7 @@ function FormGraficos() {
     fechaMinima: "",
     fechaMaxima: "",
   });
+  const [todoPromedio, setTodoPromedio] = useState("0");
 
   const LimiteFechas = async () => {
     try {
@@ -36,22 +37,21 @@ function FormGraficos() {
     LimiteFechas();
   }, []);
 
-  const Obtenerdato = (e) => {
+  const verificarFormulario = (e) => {
     e.preventDefault();
     if (!tipoDato || tipoDato === "0") {
       alert("Selecciona un tipo de dato");
       return;
     }
-
-    if (!fecha1 || fecha1 === "") {
+    if (!fecha1) {
       alert("Selecciona la primera fecha");
       return;
     }
-
-    if (!fecha2 || fecha2 === "") {
+    if (!fecha2) {
       alert("Selecciona la segunda fecha");
       return;
     }
+
     setMostrarGrafico(true);
   };
 
@@ -60,13 +60,13 @@ function FormGraficos() {
       <main className="container">
         <form>
           <div className="divFormulario input-group mb-3">
-            <label className="input-group-text" htmlFor="inputGroupSelect01">
+            <label className="input-group-text" htmlFor="inputGroupTipoDato">
               Tipo de dato
             </label>
 
             <select
               className="form-select"
-              id="inputGroupSelect01"
+              id="inputGroupTipoDato"
               value={tipoDato}
               onChange={(e) => {
                 const valor = e.target.value;
@@ -124,13 +124,40 @@ function FormGraficos() {
             />
           </div>
 
-          <button onClick={Obtenerdato} className="colorBoton btn">
+          <div className="divFormulario input-group mb-3">
+            <label
+              className="input-group-text"
+              htmlFor="inputGroupTodoPromedio"
+            >
+              Mostrar...
+            </label>
+            <select
+              className="form-select"
+              id="inputGroupTodoPromedio"
+              value={todoPromedio}
+              onChange={(e) => setTodoPromedio(e.target.value)}
+            >
+              <option value="0">Promedio por dia</option>
+              <option value="1">Todo</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            onClick={verificarFormulario}
+            className="colorBoton btn"
+          >
             Generar grafico
           </button>
         </form>
 
         {mostrarGrafico && (
-          <GenerarGrafico tipoDato={tipoDato} fecha1={fecha1} fecha2={fecha2} />
+          <GenerarGrafico
+            tipoDato={tipoDato}
+            fecha1={fecha1}
+            fecha2={fecha2}
+            todoPromedio={todoPromedio}
+          />
         )}
 
         <br />

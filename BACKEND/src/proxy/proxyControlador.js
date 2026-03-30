@@ -35,12 +35,10 @@ const obtenerUltimoRegistro = async (req, res) => {
     res.json(registro);
   } catch (error) {
     console.error("Error en el controlador:", error);
-    res
-      .status(500)
-      .json({
-        mensaje: "Error al obtener el ultimo registro",
-        error: error.message,
-      });
+    res.status(500).json({
+      mensaje: "Error al obtener el ultimo registro",
+      error: error.message,
+    });
   }
 };
 
@@ -65,12 +63,22 @@ const obtenerRangoFechas = async (req, res) => {
     res.json(registro);
   } catch (error) {
     console.error("Error en el controlador:", error);
+    res.status(500).json({
+      mensaje: "Error al obtener el rango de fechas",
+      error: error.message,
+    });
+  }
+};
+
+const obtenerPromedio = async (req, res) => {
+  try {
+    const promedios = await controller.getPromedios();
+    res.json(promedios);
+  } catch (error) {
+    console.error("Error en el controlador:", error);
     res
       .status(500)
-      .json({
-        mensaje: "Error al obtener el rango de fechas",
-        error: error.message,
-      });
+      .json({ mensaje: "Error al obtener promedios", error: error.message });
   }
 };
 
@@ -79,5 +87,6 @@ module.exports = {
   crearRegistro,
   obtenerUltimoRegistro,
   DatosParaGrafica,
-  obtenerRangoFechas
+  obtenerRangoFechas,
+  obtenerPromedio,
 };

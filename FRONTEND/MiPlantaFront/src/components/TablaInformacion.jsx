@@ -11,8 +11,25 @@ function formatearFecha(fecha) {
   });
 }
 
-function TablaInfomracion() {
-  const [datos, setDatos] = useState([]);
+function TablaInformacion() {
+  const [datosTabla, setDatosTabla] = useState([]);
+  const [datosPromedio, setDatosPromedio] = useState({
+    promedioHumedad: 0,
+    promedioTemperatura: 0,
+  });
+
+  const ObtenerPromedios = async () => {
+    try {
+      const resultado = await axios.get(`${URL}/promedios`);
+      const { data } = resultado;
+      setDatosPromedio({
+        promedioHumedad: Number(resultado.data[0].promedioHumedad),
+        promedioTemperatura: Number(resultado.data[0].promedioTemperatura),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const ObtenerDatos = async () => {
     try {
@@ -24,9 +41,7 @@ function TablaInfomracion() {
         fecha: formatearFecha(d.fecha),
       }));
 
-      setDatos(registros);
-
-      console.log(registros);
+      setDatosTabla(registros);
     } catch (error) {
       console.error(error);
     }
@@ -34,9 +49,11 @@ function TablaInfomracion() {
 
   useEffect(() => {
     ObtenerDatos();
+    ObtenerPromedios();
 
     const intervalo = setInterval(() => {
       ObtenerDatos();
+      ObtenerPromedios();
     }, 60000);
 
     return () => clearInterval(intervalo);
@@ -44,6 +61,13 @@ function TablaInfomracion() {
 
   return (
     <>
+      <div style={{ textAlign: "center" }} className="h4" key={datosPromedio}>
+        <p>Promedio humedad: {datosPromedio.promedioHumedad.toFixed(1)} %</p>
+        <p>
+          Promedio temperatura: {datosPromedio.promedioTemperatura.toFixed(1)}{" "}
+          °C
+        </p>
+      </div>
       <table className="table table-dark table-striped table-hover">
         <thead>
           <tr>
@@ -54,7 +78,7 @@ function TablaInfomracion() {
           </tr>
         </thead>
         <tbody>
-          {datos.map((dato) => (
+          {datosTabla.map((dato) => (
             <tr key={dato.id}>
               <td>{dato.id}</td>
               <td>{dato.humedad}</td>
@@ -68,4 +92,4 @@ function TablaInfomracion() {
   );
 }
 
-export default TablaInfomracion;
+export default TablaInformacion;
