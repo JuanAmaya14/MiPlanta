@@ -73,7 +73,7 @@ while True:
 
     except Exception as e:
         print(f"\nOcurrio un error inesperado: {e}")
-        if 'resp' in locals():
+        if "resp" in locals():
             print(resp.text)
 
-    time.sleep(3)
+    time.sleep(3600)

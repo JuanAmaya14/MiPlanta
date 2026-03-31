@@ -14,11 +14,11 @@ app.set("FrontPort", process.env.FRONT_PORT);
 
 app.use(
   cors({
-    origin: `http://${app.get("FrontHost")}:${app.get("FrontPort")}`,
+    origin: true,
     methods: ["GET"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
-  }),
+  })
 );
 
 // Registrar modelos antes de sincronizar la base de datos
