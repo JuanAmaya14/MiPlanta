@@ -9,14 +9,9 @@ npm install express mysql2 nodemon sequelize dotenv cors
 ## Frontend
 
 ```
-npm install react-router-dom sass react-chartjs-2 chart.js
-npm install serve
+npm install react-router-dom sass react-chartjs-2 chart.js serve
 ```
 ### Para construir el frontend y hostearlo en la raspberry
-instalar serve
-```
-npm install serve
-```
 Construitr el proyecto
 ```
 npm run build
