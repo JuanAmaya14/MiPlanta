@@ -1,3 +1,5 @@
+USE miplantadb;
+
 DELIMITER $$
 
 CREATE PROCEDURE ListasRegistros()

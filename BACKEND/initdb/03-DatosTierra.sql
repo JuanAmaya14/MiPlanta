@@ -1,3 +1,5 @@
+USE miplantadb;
+
 INSERT INTO
   `registro`
 VALUES
