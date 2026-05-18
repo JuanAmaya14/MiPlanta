@@ -1,7 +1,6 @@
-version: '3.9'
+version: "3.9"
 
 services:
-
   miplanta-backend:
     build:
       context: ./BACKEND
@@ -14,6 +13,8 @@ services:
       - ./BACKEND:/home/app/BACKEND
     env_file:
       - ./BACKEND/.env
+    environment:
+      - APP_HOST=0.0.0.0
 
   miplanta-frontend:
     build:
@@ -29,7 +30,7 @@ services:
       - ./FRONTEND/MiPlantaFront/.env
 
   miplanta-db:
-    image: mysql
+    image: mysql:8.0
     ports:
       - "${DB_PUERTO}:3306"
     environment:
