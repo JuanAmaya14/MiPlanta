@@ -4,7 +4,7 @@ WORKDIR /home/app/BACKEND
 
 COPY package*.json ./
 
-RUN npm ci --only=production # Más rápido y limpio para producción
+RUN npm ci --only=production
 
 COPY . .
 
