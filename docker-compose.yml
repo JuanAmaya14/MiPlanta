@@ -1,0 +1,42 @@
+services:
+  miplanta-db:
+    image: mysql:8.0
+    container_name: miplanta-db
+    ports:
+      - "${DB_PUERTO}:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_NOMBRE}
+      MYSQL_ROOT_PASSWORD: ${DB_CONTRASENHA}
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./BACKEND/initdb:/docker-entrypoint-initdb.d
+    restart: always
+
+  miplanta-backend:
+    build:
+      context: ./BACKEND
+      dockerfile: Dockerfile.backend
+    container_name: miplanta-backend
+    ports:
+      - "${DOCKER_PORT_BACK}:3000"
+    depends_on:
+      - miplanta-db
+    env_file:
+      - ./BACKEND/.env
+    environment:
+      - APP_HOST=0.0.0.0
+    restart: always
+
+  miplanta-frontend:
+    build:
+      context: ./FRONTEND/MiPlantaFront
+      dockerfile: Dockerfile.frontend
+    container_name: miplanta-frontend
+    ports:
+      - "${DOCKER_PORT_FRONT}:5173"
+    depends_on:
+      - miplanta-backend
+    restart: always
+
+volumes:
+  mysql-data:

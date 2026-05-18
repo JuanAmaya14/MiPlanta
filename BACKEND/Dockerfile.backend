@@ -1,0 +1,13 @@
+FROM node:22-alpine AS runner
+
+WORKDIR /home/app/BACKEND
+
+COPY package*.json ./
+
+RUN npm ci --only=production # Más rápido y limpio para producción
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "src/app.js"]
