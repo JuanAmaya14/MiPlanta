@@ -6,9 +6,10 @@ services:
     ports:
       - "${DOCKER_PORT_BACK}:3000"
     depends_on:
-      - miplanta-db
+      - miplanta-db-dev
     volumes:
       - ./BACKEND:/home/app/BACKEND
+      - /home/app/BACKEND/node_modules
     env_file:
       - ./BACKEND/.env
     environment:
@@ -21,9 +22,10 @@ services:
     ports:
       - "${DOCKER_PORT_FRONT}:5173"
     volumes:
-      - ./FRONTEND:/app
+      - ./FRONTEND/MiPlantaFront:/home/app/FRONTEND
+      - /home/app/FRONTEND/node_modules
     depends_on:
-      - miplanta-backend
+      - miplanta-backend-dev
     env_file:
       - ./FRONTEND/MiPlantaFront/.env
 
